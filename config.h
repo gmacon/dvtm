@@ -33,7 +33,7 @@ static Color colors[] = {
 /* status bar (command line option -s) position */
 #define BAR_POS         BAR_TOP /* BAR_BOTTOM, BAR_OFF */
 /* whether status bar should be hidden if only one client exists */
-#define BAR_AUTOHIDE    true
+#define BAR_AUTOHIDE    false
 /* master width factor [0.1 .. 0.9] */
 #define MFACT 0.5
 /* number of clients in master area */
@@ -66,7 +66,7 @@ static Layout layouts[] = {
 	{ "[ ]", fullscreen },
 };
 
-#define MOD  CTRL('g')
+#define MOD  CTRL('a')
 #define TAGKEYS(KEY,TAG) \
 	{ { MOD, 'v', KEY,     }, { view,           { tags[TAG] }               } }, \
 	{ { MOD, 't', KEY,     }, { tag,            { tags[TAG] }               } }, \
@@ -75,7 +75,8 @@ static Layout layouts[] = {
 
 /* you can at most specifiy MAX_ARGS (3) number of arguments */
 static KeyBinding bindings[] = {
-	{ { MOD, 'c',          }, { create,         { NULL }                    } },
+	{ { MOD, '\n',         }, { create,         { NULL }                    } },
+	{ { MOD, '\r',         }, { create,         { NULL }                    } },
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
 	{ { MOD, 'x',          }, { killclient,     { NULL }                    } },
 	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
@@ -95,8 +96,7 @@ static KeyBinding bindings[] = {
 	{ { MOD, 's',          }, { togglebar,      { NULL }                    } },
 	{ { MOD, 'S',          }, { togglebarpos,   { NULL }                    } },
 	{ { MOD, 'M',          }, { togglemouse,    { NULL }                    } },
-	{ { MOD, '\n',         }, { zoom ,          { NULL }                    } },
-	{ { MOD, '\r',         }, { zoom ,          { NULL }                    } },
+	{ { MOD, 'z',          }, { zoom ,          { NULL }                    } },
 	{ { MOD, '1',          }, { focusn,         { "1" }                     } },
 	{ { MOD, '2',          }, { focusn,         { "2" }                     } },
 	{ { MOD, '3',          }, { focusn,         { "3" }                     } },
