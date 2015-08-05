@@ -30,6 +30,9 @@ static Color colors[] = {
 #define URGENT_ATTR     NORMAL_ATTR
 /* curses attributes for the status bar */
 #define BAR_ATTR        (COLOR(BLUE) | A_NORMAL)
+/* characters for beginning and end of status bar message */
+#define BAR_BEGIN       '['
+#define BAR_END         ']'
 /* status bar (command line option -s) position */
 #define BAR_POS         BAR_TOP /* BAR_BOTTOM, BAR_OFF */
 /* whether status bar should be hidden if only one client exists */
@@ -78,7 +81,7 @@ static KeyBinding bindings[] = {
 	{ { MOD, '\n',         }, { create,         { NULL }                    } },
 	{ { MOD, '\r',         }, { create,         { NULL }                    } },
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
-	{ { MOD, 'x',          }, { killclient,     { NULL }                    } },
+	{ { MOD, 'x', 'x',     }, { killclient,     { NULL }                    } },
 	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
 	{ { MOD, 'J',          }, { focusnextnm,    { NULL }                    } },
 	{ { MOD, 'K',          }, { focusprevnm,    { NULL }                    } },
@@ -107,7 +110,7 @@ static KeyBinding bindings[] = {
 	{ { MOD, '8',          }, { focusn,         { "8" }                     } },
 	{ { MOD, '9',          }, { focusn,         { "9" }                     } },
 	{ { MOD, '\t',         }, { focuslast,      { NULL }                    } },
-	//{ { MOD, 'q',          }, { quit,           { NULL }                    } },
+	{ { MOD, 'q', 'q',     }, { quit,           { NULL }                    } },
 	{ { MOD, 'a',          }, { togglerunall,   { NULL }                    } },
 	{ { MOD, CTRL('L'),    }, { redraw,         { NULL }                    } },
 	{ { MOD, 'r',          }, { redraw,         { NULL }                    } },
