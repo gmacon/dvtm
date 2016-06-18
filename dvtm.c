@@ -51,6 +51,7 @@ typedef struct {
 	int w;
 	int h;
 	volatile sig_atomic_t need_resize;
+	volatile sig_atomic_t need_check_deaths;
 } Screen;
 
 typedef struct {
@@ -688,6 +689,11 @@ get_client_by_coord(unsigned int x, unsigned int y) {
 
 static void
 sigchld_handler(int sig) {
+	screen.need_check_deaths = true;
+}
+
+static void
+check_deaths() {
 	int errsv = errno;
 	int status;
 	pid_t pid;
@@ -1736,6 +1742,11 @@ main(int argc, char *argv[]) {
 		if (screen.need_resize) {
 			resize_screen();
 			screen.need_resize = false;
+		}
+
+		if (screen.need_check_deaths) {
+			check_deaths();
+			screen.need_check_deaths = false;
 		}
 
 		FD_ZERO(&rd);
