@@ -11,11 +11,11 @@ TERMINFO := ${DESTDIR}${PREFIX}/share/terminfo
 
 INCS = -I.
 LIBS = -lc -lutil -lncurses
-CPPFLAGS = -I/usr/local/opt/ncurses/include -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -D_XOPEN_SOURCE_EXTENDED
+CPPFLAGS = -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -D_XOPEN_SOURCE_EXTENDED
 CFLAGS += -std=c99 ${INCS} -DVERSION=\"${VERSION}\" -DNDEBUG ${CPPFLAGS} -D_DARWIN_C_SOURCE
-LDFLAGS += -L/usr/local/opt/ncurses/lib ${LIBS}
+LDFLAGS += ${LIBS}
 
-DEBUG_CFLAGS = ${CFLAGS} -UNDEBUG -O0 -g -Wall -Wextra -Wno-unused-parameter
+DEBUG_CFLAGS = ${CFLAGS} -UNDEBUG -O0 -g -ggdb -Wall -Wextra -Wno-unused-parameter
 
 CC ?= cc
 STRIP ?= strip
